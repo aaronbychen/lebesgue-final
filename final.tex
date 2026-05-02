@@ -1,0 +1,850 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} % reduce margin
+
+% Basic packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{xifthen}
+
+% Math packages
+\usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{bm}
+\usepackage{systeme}
+\usepackage{stmaryrd} % for \lightning
+
+% Math shortcuts
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\emptyset}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\newcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand\F{\ensuremath{\mathbb{F}}}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Ker}{ker}
+\DeclareMathOperator{\im}{Im}
+
+% Logic symbols
+\let\svlim\lim\def\lim{\svlim\limits}
+\let\implies\Rightarrow
+\let\impliedby\Leftarrow
+\let\iff\Leftrightarrow
+\let\epsilon\varepsilon
+\newcommand\contra{\scalebox{1.1}{$\lightning$}}
+
+% Useful commands
+\definecolor{correct}{HTML}{009900}
+\newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
+\newcommand\green[1]{{\color{correct}{#1}}}
+
+% Horizontal rule
+\newcommand\hr{
+    \noindent\rule[0.5ex]{\linewidth}{0.5pt}
+}
+
+% Simple theorem environments (without fancy boxes for homework)
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem*{example}{Example}
+
+% Problem environment
+\newcounter{problem}
+\newenvironment{problem}[1][]
+{
+    \stepcounter{problem}
+    \section*{Problem \theproblem\ifx\relax#1\relax\else: #1\fi}
+}
+{}
+
+% Subproblem environment
+\newcounter{subproblem}[problem]
+\newenvironment{subproblem}[1][]
+{
+    \stepcounter{subproblem}
+    \subsection*{(\alph{subproblem})\ifx\relax#1\relax\else\ #1\fi}
+}
+{}
+
+% Solution environment
+\newenvironment{solution}
+{
+    \noindent\textbf{Solution:}\\
+}
+{
+    
+}
+
+% Headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Sherlock Zhang}
+\fancyhead[C]{Math 4102 - Midterm Problem List}
+\fancyhead[R]{ID: 518915}
+\fancyfoot[C]{\thepage}
+
+% Title info
+\title{Math 4102 - Midterm Problem List}
+\author{Sherlock Zhang}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% =============================================================================
+% HOMEWORK PROBLEMS START HERE
+% =============================================================================
+
+\begin{problem}[Theorem 30.1]
+
+State and prove Egoroff's theorem.
+
+\end{problem}
+
+\vspace{2em}
+\begin{solution}
+
+\textbf{30.1 \quad Theorem (Egoroff):} Let $A$ be a bounded measurable set in $\mathbb{R}$. Let $f_n$ and $f$ be functions defined on $A$ such that each $f_n$ is measurable and $f_n \to f$ almost everywhere on $A$. Then given any $\varepsilon > 0$, there exists a measurable subset $A_\varepsilon \subset A$ such that $m(A \setminus A_\varepsilon) < \varepsilon$ and $f_n \to f$ uniformly on $A_\varepsilon$.
+
+\medskip
+
+\textbf{Proof:} Given $\varepsilon > 0$ and positive integers $m$ and $n$, define the set
+\[
+E_{m,n} = \bigcap_{i=n}^{\infty} \{x \mid |f_i(x) - f(x)| < 1/m\}.
+\]
+Note that $E_{m,n}$ is measurable. If $U$ is the subset on which $f_n \to f$, then clearly for any $m$, 
+\[
+U \subset \bigcup_{n=1}^{\infty} E_{m,n} \subset A.
+\]
+
+Now $m(U) = m(A)$ so
+\[
+m\!\left(\bigcup_{n=1}^{\infty} E_{m,n}\right) = m(A).
+\]
+But $E_{m,n} \subset E_{m,n+1}$ for all $m$ and $n$, so
+\[
+\lim_{n \to \infty} m(A \setminus E_{m,n})
+= \lim_{n \to \infty} [m(A) - m(E_{m,n})]
+= m(A) - \lim_{n \to \infty} m(E_{m,n})
+= m(A) - m\!\left(\bigcup_{n=1}^{\infty} E_{m,n}\right)
+= 0.
+\]
+
+Thus for each $m$, there exists an integer $n_m$ such that
+\[
+m(A \setminus E_{m,n_m}) < \varepsilon / 2^m.
+\]
+
+Now let
+\[
+A_\varepsilon = \bigcap_{m=1}^{\infty} E_{m,n_m}.
+\]
+Then $A_\varepsilon$ is measurable and
+\[
+m(A \setminus A_\varepsilon)
+= m\!\left(A \setminus \bigcap_{m=1}^{\infty} E_{m,n_m}\right)
+= m\!\left(\bigcup_{m=1}^{\infty} (A \setminus E_{m,n_m})\right)
+\le \sum_{m=1}^{\infty} m(A \setminus E_{m,n_m})
+< \sum_{m=1}^{\infty} \varepsilon / 2^m
+= \varepsilon.
+\]
+
+We now claim that $f_n \to f$ uniformly on $A_\varepsilon$ since given any $m$, there exists an $n_m$ such that for all $n > n_m$, $|f_n(x) - f(x)| < 1/m$ everywhere on $E_{m,n_m}$. But $A_\varepsilon \subset E_{m,n_m}$ for every $m$, so for all $n > n_m$, $|f_n(x) - f(x)| < 1/m$ everywhere on $A_\varepsilon$. But this is exactly uniform convergence. \qed
+
+\end{solution}
+
+\newpage
+\begin{problem}[Theorem 30.3]
+
+State and prove Lusin's theorem.
+
+\end{problem}
+
+\vspace{2em}
+\begin{solution}
+\textbf{30.3 \quad Theorem (Lusin):} If $f$ is a measurable function on a bounded measurable set $A$, then given any $\varepsilon > 0$, there exists a closed set $C_\varepsilon \subset A$ such that $m(A \setminus C_\varepsilon) < \varepsilon$ and $f$ is continuous on $C_\varepsilon$. (That is, the restriction of $f$ to $C_\varepsilon$ is continuous.)
+
+\medskip
+
+\textbf{Proof:} First, let 
+$f = \sum_{k=1}^{n} a_k \chi_{E_k}$
+be a simple function on $A$. Given $\varepsilon > 0$, for each $k$ there exists a closed set $C_k \subset E_k$ such that
+\[
+m(E_k \setminus C_k) < \varepsilon / n
+\]
+(see Corollary 13.3). Now $ C = \bigcup_{k=1}^{n} C_k $ is closed, $m(A \setminus C) < \varepsilon$ (Exercise 31.23) and $f$ is continuous on $C$ since $C$ is equal to the disjoint union of closed sets $C_k$ and $f$ is constant on each $C_k$. (Exercise 31.24).
+
+\medskip
+
+Now let $f$ be any measurable function. Since $f = f_+ - f_-$, we may assume $f$ is non-negative. Since $f$ is measurable, $ f = \lim_{n \to \infty} f_n $ for a sequence $\{f_n\}$ of simple functions by Theorem 19.4.
+
+\medskip
+
+By the first part of the proof, given $\varepsilon > 0$, there exists for each $n$ a closed set $C_n$ such that $m(A \setminus C_n) < \varepsilon / 2^{n+1}$ and $f_n$ is continuous on $C_n$.
+
+\medskip
+
+Let 
+\[
+C_0 = \bigcap_{n=1}^{\infty} C_n.
+\]
+Then $C_0$ is closed and
+\[
+m(A \setminus C_0)
+= m\!\left(A \setminus \bigcap_{n=1}^{\infty} C_n\right)
+= m\!\left(\bigcup_{n=1}^{\infty} (A \setminus C_n)\right)
+\le \sum_{n=1}^{\infty} m(A \setminus C_n)
+< \varepsilon \sum_{n=1}^{\infty} \frac{1}{2^{n+1}}
+= \varepsilon/2.
+\]
+
+We would like to conclude that $f$ is continuous on $C_0$, but we cannot since we need something like uniform convergence for this. However, by Egoroff's Theorem, there is a measurable subset $C \subset C_0$ such that $m(C_0 \setminus C) < \varepsilon/4$ [and thus $m(A \setminus C) = m(A \setminus C_0) + m(C_0 \setminus C) < 3\varepsilon/4$], and $f_n \to f$ uniformly on $C$.
+
+\medskip
+
+Now each $f_n$ is continuous on $C \subset C_0$ so that $f$, being the uniform limit of the $f_n$, is continuous on $C$. If $C$ is closed we are through. If not, take closed set $F \subset C$ such that $m(C \setminus F) < \varepsilon/4$. \qed
+\end{solution}
+
+\newpage
+\begin{problem}[Definition 32.3]
+State the definition of a normed linear space and give both finite- and $ \infty $-dimensional examples.
+\end{problem}
+
+\vspace{2em}
+\begin{solution}
+\textbf{Definition.} A real \emph{normed linear space} is a vector space $V$ (with addition and scalar multiplication denoted by $\bar{u} + \bar{v}$, $a\bar{u}$, respectively) such that for each $\bar{u} \in V$, there is a unique real number $\|\bar{u}\|$ (called the norm or length of $\bar{u}$) satisfying:
+\begin{enumerate}
+    \item $\|\bar{u}\| \ge 0$ for all $\bar{u} \in V$;
+    \item $\|\bar{u}\| = 0$ if and only if $\bar{u} = \bar{0}$;
+    \item $\|a\bar{u}\| = |a|\,\|\bar{u}\|$ for all $a \in \mathbb{R}$, $\bar{u} \in V$;
+    \item $\|\bar{u} + \bar{v}\| \le \|\bar{u}\| + \|\bar{v}\|$ for all $\bar{u}, \bar{v} \in V$.
+\end{enumerate}
+
+\medskip
+
+\textbf{Examples.}
+
+\textbf{(Finite-dimensional example)}  
+For $(x_1,\dots,x_n) \in \mathbb{R}^n$,
+\[
+\|(x_1,\dots,x_n)\| = \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2}.
+\]
+
+\textbf{($\infty$-dimensional example)}  
+For $f \in C([0,1])$,
+\[
+\|f\| = \int_0^1 |f(x)|\,dx.
+\]
+\end{solution}
+
+\newpage
+\begin{problem}[Example 32.15]
+State the definition of a real Hilbert space and give both finite- and $ \infty $-dimensional examples.
+\end{problem}
+
+\vspace{2em}
+\begin{solution}
+A real Hilbert space is a real inner product space V that is complete with respect to the norm induced by the inner product.
+\end{solution}
+
+\newpage
+\begin{problem}
+Determine whether $\{\cos kx:k=0,1,2,\ldots\}$ is an orthogonal set in
+$L^2[0,\pi]$.
+\end{problem}
+
+\vspace{2em}
+\begin{solution}
+For $j,k=0,1,2,\ldots$, consider
+\[
+    \int_0^\pi \cos jx \cos kx\,dx.
+\]
+If $j\neq k$, then by the product-to-sum identity,
+\[
+    \cos jx\cos kx
+    =
+    \frac{1}{2}\bigl[\cos((j-k)x)+\cos((j+k)x)\bigr].
+\]
+Therefore,
+\[
+\begin{aligned}
+    \int_0^\pi \cos jx\cos kx\,dx
+    &=
+    \frac{1}{2}\int_0^\pi \cos((j-k)x)\,dx
+    +
+    \frac{1}{2}\int_0^\pi \cos((j+k)x)\,dx \\[4pt]
+    &=
+    \frac{1}{2}
+    \left[\frac{\sin((j-k)x)}{j-k}\right]_0^\pi
+    +
+    \frac{1}{2}
+    \left[\frac{\sin((j+k)x)}{j+k}\right]_0^\pi \\[4pt]
+    &=0.
+\end{aligned}
+\]
+Also, none of the functions $\cos kx$ is the zero function in $L^2[0,\pi]$.
+Hence
+\[
+    \{\cos kx:k=0,1,2,\ldots\}
+\]
+is an orthogonal set in $L^2[0,\pi]$.
+\end{solution}
+
+\newpage
+\begin{problem}[Theorem 32.13]
+    State and prove Cauchy's inequality
+\end{problem}
+
+\vspace{2em}
+\begin{solution}
+\textbf{32.13 Cauchy Inequality:} If $V$ is an inner product space with inner product $\bar{u} \cdot \bar{v}$, then for any $\bar{u}, \bar{v} \in V$,
+\[
+|\bar{u} \cdot \bar{v}| \le \sqrt{\bar{u} \cdot \bar{u}} \, \sqrt{\bar{v} \cdot \bar{v}}.
+\]
+
+\textbf{Proof:} If $\bar{u} = \bar{0}$ or $\bar{v} = \bar{0}$, then equality holds trivially. Otherwise, consider the vectors
+\[
+\bar{u}' = \frac{\bar{u}}{\sqrt{\bar{u} \cdot \bar{u}}}
+\quad \text{and} \quad
+\bar{v}' = \frac{\bar{v}}{\sqrt{\bar{v} \cdot \bar{v}}}.
+\]
+
+It is easy to verify that $\bar{u}' \cdot \bar{u}' = \bar{v}' \cdot \bar{v}' = 1$, so that by the lemma,
+\[
+|\bar{u}' \cdot \bar{v}'| \le 1.
+\]
+But
+\[
+|\bar{u}' \cdot \bar{v}'|
+= \frac{|\bar{u} \cdot \bar{v}|}{\sqrt{\bar{u} \cdot \bar{u}} \, \sqrt{\bar{v} \cdot \bar{v}}}
+\le 1.
+\]
+\qed
+\end{solution}
+
+
+\newpage
+\begin{problem}[Theorem 33.9]
+State and prove Minkowsky's inequality in $ \mathcal{L}^2 $.
+\end{problem}
+
+\vspace{2em}
+\begin{solution}
+\textbf{Theorem (Minkowski Inequality in $L^2$).}
+For $f,g \in L^2(A)$,
+\[
+\|f+g\|_2 \le \|f\|_2 + \|g\|_2,
+\]
+i.e.,
+\[
+\left( \int_A (f+g)^2 \, dm \right)^{1/2}
+\le
+\left( \int_A f^2 \, dm \right)^{1/2}
++
+\left( \int_A g^2 \, dm \right)^{1/2}.
+\]
+
+\textbf{Proof}:
+\end{solution}
+
+\newpage
+\begin{problem}[Page 120]
+Define a trigonometric polynomial and a trigonometric series
+\end{problem}
+
+\vspace{2em}
+\begin{solution}
+A \textbf{trigonometric polynomial} is a finite sum of the form
+\[
+    \sum_{k=0}^{n} \left(a_k \cos kx + b_k \sin kx\right),
+\]
+where $a_k,b_k \in \mathbb{R}$.
+
+\vspace{2em}
+\noindent A \textbf{trigonometric series} is an infinite series of the form
+\[
+    \sum_{k=0}^{\infty} \left(a_k \cos kx + b_k \sin kx\right),
+\]
+where $a_k,b_k \in \mathbb{R}$.
+\end{solution}
+
+\newpage
+\begin{problem}[Theorem 36.3]
+State and prove Bessel's inequality for an orthonormal set in $L^2[-\pi,\pi]$.
+\end{problem}
+
+\vspace{2em}
+\begin{solution}
+Let $\{u_k\}_{k=0}^{\infty}$ be an orthonormal set in $L^2[-\pi,\pi]$, and let
+$f \in L^2[-\pi,\pi]$. Define
+\[
+    c_k = f \cdot u_k = \int_{[-\pi,\pi]} f u_k \, dm.
+\]
+Then Bessel's inequality states that
+\[
+    \sum_{k=0}^{\infty} c_k^2 \le \int_{[-\pi,\pi]} f^2 \, dm.
+\]
+
+\textbf{Proof.}
+By Corollary 36.2, for every $n$,
+\[
+    \int_{[-\pi,\pi]} f^2 \, dm \ge \sum_{k=0}^{n} c_k^2.
+\]
+Since each $c_k^2 \ge 0$, the partial sums
+\[
+    \sum_{k=0}^{n} c_k^2
+\]
+are increasing and bounded above by $\int_{[-\pi,\pi]} f^2 \, dm$.
+Therefore the infinite series converges and satisfies
+\[
+    \sum_{k=0}^{\infty} c_k^2 \le \int_{[-\pi,\pi]} f^2 \, dm.
+\]
+\end{solution}
+
+\newpage
+\begin{problem}[Theorem 36.4]
+State and prove the Riemann-Lebesgue lemma for the Fourier series of $f \in L^2[-\pi,\pi]$.
+\end{problem}
+
+\vspace{2em}
+\begin{solution}
+Let $\{u_k\}_{k=0}^{\infty}$ be an orthonormal set in $L^2[-\pi,\pi]$, and let
+$f \in L^2[-\pi,\pi]$. Define
+\[
+    c_k = f \cdot u_k = \int_{[-\pi,\pi]} f u_k \, dm.
+\]
+The Riemann-Lebesgue lemma states that
+\[
+    \lim_{k\to\infty} c_k = 0.
+\]
+
+\textbf{Proof.}
+By Bessel's inequality,
+\[
+    \sum_{k=0}^{\infty} c_k^2 \le \int_{[-\pi,\pi]} f^2 \, dm.
+\]
+Thus $\sum_{k=0}^{\infty} c_k^2$ is a convergent series of nonnegative terms.
+Therefore,
+\[
+    \lim_{k\to\infty} c_k^2 = 0.
+\]
+Hence,
+\[
+    \lim_{k\to\infty} c_k = 0.
+\]
+\end{solution}
+
+\newpage
+\begin{problem}[Lemma 37.4]
+Give two formulas for the Dirichlet kernel $D_n(t)$.
+\end{problem}
+
+\vspace{2em}
+\begin{solution}
+The \textbf{Dirichlet kernel} $D_n(t)$ is
+\[
+D_n(t)
+=
+\frac12+\sum_{k=1}^{n}\cos(kt).
+\]
+
+\vspace{2em}
+\noindent Equivalently, using Lemma 37.4,
+\[
+D_n(t)=
+\begin{cases}
+0, & t=2k\pi,\ k\in\mathbb{Z},\\[6pt]
+\displaystyle
+\frac{\sin\left(\left(n+\frac12\right)t\right)}
+{2\sin\left(\frac{t}{2}\right)},
+& \text{otherwise}.
+\end{cases}
+\]
+\end{solution}
+
+\newpage
+\begin{problem}[Lemma 37.5]
+Express the partial sum $s_n(x)$ of the Fourier series for a function
+$f\in L^2[-\pi,\pi]$ using the Lebesgue integral and the Dirichlet kernel.
+\end{problem}
+
+\vspace{2em}
+\begin{solution}
+By Lemma 37.5, if $f\in L^2[-\pi,\pi]$, then the Fourier partial sum
+$s_n(x)$ can be written as
+\[
+    s_n(x)
+    =
+    \frac{1}{\pi}\int_0^\pi
+    \bigl[f(x+t)+f(x-t)\bigr]D_n(t)\,dt,
+\]
+where
+\[
+D_n(t)=
+\begin{cases}
+0, & t=2k\pi,\ k\in\mathbb{Z},\\[6pt]
+\displaystyle
+\frac{\sin\left(\left(n+\frac12\right)t\right)}
+{2\sin\left(\frac{t}{2}\right)},
+& \text{otherwise}.
+\end{cases}
+\]
+Here $f$ is understood to be extended periodically with period $2\pi$.
+\end{solution}
+
+\newpage
+\begin{problem}[Corollary 37.6]
+Give a formula for the Fej\'er kernel $K_n(t)$ and relate it to the Dirichlet kernel.
+\end{problem}
+
+\vspace{2em}
+\begin{solution}
+The \textbf{Fej\'er kernel} $K_n(t)$ is
+\[
+K_n(t)=
+\begin{cases}
+0, & t=2m\pi,\ m\in\mathbb{Z},\\[6pt]
+\displaystyle
+\frac{\sin^2\left(\frac{nt}{2}\right)}
+{2n\sin^2\left(\frac{t}{2}\right)},
+& \text{otherwise}.
+\end{cases}
+\]
+
+\vspace{2em}
+\noindent Its relation with the Dirichlet kernel is
+\[
+    K_n(t)=\frac{1}{n}\sum_{k=0}^{n-1}D_k(t).
+\]
+
+Indeed, using the definition of $D_k(t)$,
+\[
+\frac{1}{n}\sum_{k=0}^{n-1}D_k(t)
+=
+\frac{1}{2n\sin(t/2)}
+\sum_{k=0}^{n-1}
+\sin\left(\left(k+\frac12\right)t\right).
+\]
+By Lemma 37.4,
+\[
+\sum_{k=0}^{n-1}
+\sin\left(\left(k+\frac12\right)t\right)
+=
+\sum_{j=1}^{n}\sin\left((2j-1)\frac{t}{2}\right)
+=
+\frac{\sin^2(nt/2)}{\sin(t/2)}.
+\]
+Therefore,
+\[
+\frac{1}{n}\sum_{k=0}^{n-1}D_k(t)
+=
+\frac{\sin^2(nt/2)}
+{2n\sin^2(t/2)}
+=
+K_n(t).
+\]
+\end{solution}
+
+\newpage
+\begin{problem}[Definition 37.1]
+Define the Ces\`aro $(C,1)$-sum of a series $\sum_{k=1}^{\infty} a_k$. 
+Give an example of a divergent series with a convergent $(C,1)$-sum.
+\end{problem}
+
+\vspace{2em}
+\begin{solution}
+A series $\sum_{k=1}^{\infty} a_k$ is said to have \textbf{$(C,1)$-sum} (or Ces\`aro sum) $s$ if
+\[
+\lim_{n\to\infty}\sigma_n = s,
+\]
+where
+\[
+\sigma_n = \frac{s_1+s_2+\cdots+s_n}{n}
+\quad \text{and} \quad
+s_n = \sum_{k=1}^{n} a_k.
+\]
+The sequence $\{\sigma_n\}$ is called the sequence of arithmetic means.
+
+\vspace{2em}
+\noindent An example is the series
+\[
+1 - 1 + 1 - 1 + \cdots,
+\]
+which diverges, but has $(C,1)$-sum $\frac{1}{2}$, since
+\[
+\sigma_n =
+\begin{cases}
+\frac{1}{2}, & \text{if } n \text{ is even},\\[6pt]
+\frac{n+1}{2n}, & \text{if } n \text{ is odd},
+\end{cases}
+\]
+and hence $\sigma_n \to \frac{1}{2}$ as $n\to\infty$.
+\end{solution}
+
+\newpage
+\begin{problem}[Corollary 37.6]
+Express the $(C,1)$-sum $\sigma_n(x)$ of the Fourier series for a function
+$f\in L[-\pi,\pi]$ using the Lebesgue integral and the Fej\'er kernel.
+\end{problem}
+
+\vspace{2em}
+\begin{solution}
+Let
+\[
+    \sigma_n(x)=\frac{s_0(x)+s_1(x)+\cdots+s_{n-1}(x)}{n},
+\]
+where $s_n(x)$ is the $n$th Fourier partial sum. By Corollary 37.6,
+\[
+    \sigma_n(x)
+    =
+    \frac{1}{\pi}\int_0^\pi
+    [f(x+t)+f(x-t)]K_n(t)\,dt,
+\]
+where $K_n(t)$ is the Fej\'er kernel of order $n$, given by
+\[
+K_n(t)=
+\begin{cases}
+0, & t=2m\pi,\ m\in\mathbb{Z},\\[6pt]
+\displaystyle
+\frac{\sin^2\left(\frac{nt}{2}\right)}
+{2n\sin^2\left(\frac{t}{2}\right)},
+& \text{otherwise}.
+\end{cases}
+\]
+\end{solution}
+
+\newpage
+\begin{problem}[Theorem 37.8]
+Prove that if $f\in L^2[-\pi,\pi]$ and $f$ is continuous, then
+$\{\sigma_n\}$ converges uniformly to $f$.
+\end{problem}
+
+\vspace{2em}
+\begin{solution}
+Since $f$ is continuous on $[-\pi,\pi]$, it is bounded and uniformly continuous.
+Thus there exists a number $M$ such that
+\[
+    |f(x)|<M
+\]
+for all $x\in[-\pi,\pi]$. By uniform continuity, given $\epsilon>0$, there exists
+a $\delta>0$ such that $|x-y|<\delta$ in $[-\pi,\pi]$ implies
+\[
+    |f(x)-f(y)|<\frac{\epsilon}{2}.
+\]
+We will show that for some $N$, $n>N$ implies
+\[
+    |f(x)-\sigma_n(x)|<\epsilon
+\]
+for every $x\in[-\pi,\pi]$.
+
+Now
+\[
+\begin{aligned}
+|\sigma_n(x)-f(x)|
+&\overset{37.6}{=}
+\left|
+\frac{2}{\pi}\int_0^\pi
+\frac{f(x+t)+f(x-t)}{2}K_n(t)\,dt
+-f(x)
+\right| \\[6pt]
+&\overset{37.7}{=}
+\left|
+\frac{2}{\pi}\int_0^\pi
+\frac{f(x+t)+f(x-t)}{2}K_n(t)\,dt
+-f(x)\frac{2}{\pi}\int_0^\pi K_n(t)\,dt
+\right| \\[6pt]
+&\le
+\left|
+\frac{2}{\pi}\int_0^\delta
+\frac{f(x+t)+f(x-t)-2f(x)}{2}K_n(t)\,dt
+\right| \\[6pt]
+&\quad+
+\left|
+\frac{2}{\pi}\int_\delta^\pi
+\frac{f(x+t)+f(x-t)-2f(x)}{2}K_n(t)\,dt
+\right| \\[6pt]
+&\le
+\frac{\epsilon}{2}\frac{2}{\pi}\int_0^\delta K_n(t)\,dt \\[6pt]
+&\quad+
+\frac{2}{4n\pi\sin^2(\delta/2)}
+\int_\delta^\pi
+\left[|f(x+t)|+|f(x-t)|+2|f(x)|\right]dt \\[6pt]
+&<
+\frac{\epsilon}{2}
++
+\frac{1}{2n\pi\sin^2(\delta/2)}
+\int_\delta^\pi 4M\,dt.
+\end{aligned}
+\]
+
+The second term is clearly less than $\epsilon/2$ for $n$ large enough, so the
+result follows.
+\end{solution}
+
+\newpage
+\begin{problem}[Theorem 40.2]
+Prove that if $f\in L^2[-\pi,\pi]$ and $f$ is differentiable at $x$, then
+$\{s_n(x)\}$ converges to $f(x)$.
+\end{problem}
+
+\vspace{2em}
+\begin{solution}
+Let $x_0\in[-\pi,\pi]$ and suppose $f$ is differentiable at $x_0$.
+From Lemma 37.5, the $n$th Fourier partial sum is
+\[
+s_n(x_0)=\frac{1}{\pi}\int_0^\pi [f(x_0+t)+f(x_0-t)]D_n(t)\,dt.
+\]
+
+Also, for the particular case $f(x)\equiv 1$, we obtain
+\[
+1=\frac{2}{\pi}\int_0^\pi D_n(t)\,dt
+\qquad \text{for } n=1,2,3,\dots
+\]
+
+Thus, for our general $f$, differentiable at $x_0$,
+\[
+s_n(x_0)-f(x_0)
+=
+\frac{1}{\pi}\int_0^\pi
+[f(x_0+t)+f(x_0-t)-2f(x_0)]D_n(t)\,dt.
+\]
+
+Now define
+\[
+h(t)=\frac{f(x_0+t)+f(x_0-t)-2f(x_0)}{2\sin\frac{t}{2}}.
+\]
+Then $h(t)$ can be defined so as to be continuous at $t=0$. Therefore,
+$h\in L^2[0,\pi]$. Thus,
+\[
+s_n(x_0)-f(x_0)
+=
+\frac{1}{\pi}\int_0^\pi
+h(t)\sin\left(\left(n+\frac12\right)t\right)\,dt.
+\]
+
+Thus by the Riemann--Lebesgue Lemma (Corollary 36.4),
+\[
+s_n(x_0)-f(x_0)\to 0 \quad \text{as } n\to\infty.
+\]
+\end{solution}
+
+\newpage
+\begin{problem}[Theorem 41.2]
+State and prove the Riemann localization lemma.
+\end{problem}
+
+\vspace{2em}
+\begin{solution}
+Let $f\in L[-\pi,\pi]$ and $x\in[-\pi,\pi]$, and let $\delta$ be any positive real number.
+Then
+\[
+    \lim_{n\to\infty}
+    \int_\delta^\pi [f(x+t)+f(x-t)]D_n(t)\,dt
+    =
+    0.
+\]
+
+\textbf{Proof.}
+Consider
+\[
+g(t)=
+\begin{cases}
+0, & \text{on } [0,\delta),\\[6pt]
+\displaystyle
+\frac{f(x+t)+f(x-t)}{2\sin(t/2)},
+& \text{on } [\delta,\pi].
+\end{cases}
+\]
+
+Clearly $g\in L[-\pi,\pi]$ since
+\[
+    2\sin(t/2)\ge 2\sin(\delta/2)>0
+    \qquad \text{on } [\delta,\pi].
+\]
+Thus
+\[
+\int_\delta^\pi [f(x+t)+f(x-t)]D_n(t)\,dt
+=
+\int_0^\pi g(t)\sin\left(n+\frac12\right)t\,dt.
+\]
+
+Therefore,
+\[
+\lim_{n\to\infty}
+\int_\delta^\pi [f(x+t)+f(x-t)]D_n(t)\,dt
+=
+0
+\]
+by the Riemann--Lebesgue Lemma and Exercise 42.6.
+\end{solution}
+
+\newpage
+\begin{problem}[Exercise 19]
+Compute the complex exponential Fourier series of
+\[
+    f(x)=\sin x+2\cos 3x.
+\]
+\end{problem}
+
+\vspace{2em}
+\begin{solution}
+We write the complex exponential Fourier series in the form
+\[
+    f(x)=\sum_{n=-\infty}^{\infty} c_n e^{inx}.
+\]
+Using Euler's formulas,
+\[
+    \sin x=\frac{e^{ix}-e^{-ix}}{2i},
+    \qquad
+    \cos 3x=\frac{e^{3ix}+e^{-3ix}}{2}.
+\]
+Therefore,
+\[
+\begin{aligned}
+    f(x)
+    &=\sin x+2\cos 3x \\[4pt]
+    &=\frac{e^{ix}-e^{-ix}}{2i}
+      +2\left(\frac{e^{3ix}+e^{-3ix}}{2}\right) \\[4pt]
+    &=-\frac{i}{2}e^{ix}
+      +\frac{i}{2}e^{-ix}
+      +e^{3ix}
+      +e^{-3ix}.
+\end{aligned}
+\]
+Thus the only nonzero complex Fourier coefficients are
+\[
+    c_1=-\frac{i}{2},
+    \qquad
+    c_{-1}=\frac{i}{2},
+    \qquad
+    c_3=1,
+    \qquad
+    c_{-3}=1.
+\]
+All other coefficients are zero. Hence
+\[
+    f(x)
+    =
+    \frac{i}{2}e^{-ix}
+    -\frac{i}{2}e^{ix}
+    +e^{-3ix}
+    +e^{3ix}.
+\]
+\end{solution}
+
+\end{document}
