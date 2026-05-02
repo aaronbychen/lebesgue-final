@@ -259,7 +259,25 @@ State the definition of a real Hilbert space and give both finite- and $ \infty 
 
 \vspace{2em}
 \begin{solution}
-A real Hilbert space is a real inner product space V that is complete with respect to the norm induced by the inner product.
+A real \emph{Hilbert space} is a real inner product space $V$ that is complete with respect to the norm $\|\bar{u}\| = \sqrt{\bar{u} \cdot \bar{u}}$ induced by the inner product.
+
+\medskip
+
+\textbf{Examples.}
+
+\textbf{(Finite-dimensional example)}
+$\mathbb{R}^n$ with the standard inner product
+\[
+\bar{u} \cdot \bar{v} = \sum_{i=1}^{n} u_i v_i
+\]
+is a Hilbert space. Completeness follows from the completeness of $\mathbb{R}$.
+
+\textbf{($\infty$-dimensional example)}
+$L^2[a,b]$ with the inner product
+\[
+f \cdot g = \int_{[a,b]} fg\,dm
+\]
+is a Hilbert space. Completeness is given by the Riesz--Fischer theorem (Theorem 33.11).
 \end{solution}
 
 \newpage
@@ -359,7 +377,28 @@ i.e.,
 \left( \int_A g^2 \, dm \right)^{1/2}.
 \]
 
-\textbf{Proof}:
+\textbf{Proof:}
+We expand $\|f+g\|_2^2$:
+\[
+\|f+g\|_2^2
+= \int_A (f+g)^2\,dm
+= \int_A f^2\,dm + 2\int_A fg\,dm + \int_A g^2\,dm.
+\]
+By the Cauchy--Schwarz inequality (Theorem 33.5),
+\[
+\int_A fg\,dm \le \left|\int_A fg\,dm\right| \le \|f\|_2\,\|g\|_2.
+\]
+Therefore,
+\[
+\|f+g\|_2^2
+\le \|f\|_2^2 + 2\|f\|_2\,\|g\|_2 + \|g\|_2^2
+= \bigl(\|f\|_2 + \|g\|_2\bigr)^2.
+\]
+Taking square roots of both sides gives
+\[
+\|f+g\|_2 \le \|f\|_2 + \|g\|_2.
+\]
+\qed
 \end{solution}
 
 \newpage
