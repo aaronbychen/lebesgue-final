@@ -370,11 +370,11 @@ For $f,g \in L^2(A)$,
 \]
 i.e.,
 \[
-\left( \int_A (f+g)^2 \, dm \right)^{1/2}
+\sqrt{\int_A (f+g)^2 \, dm}
 \le
-\left( \int_A f^2 \, dm \right)^{1/2}
+\sqrt{\int_A f^2 \, dm}
 +
-\left( \int_A g^2 \, dm \right)^{1/2}
+\sqrt{\int_A g^2 \, dm}
 \]
 
 \textbf{Proof:}
@@ -384,7 +384,7 @@ We expand $\|f+g\|_2^2$:
 = \int_A (f+g)^2\,dm
 = \int_A f^2\,dm + 2\int_A fg\,dm + \int_A g^2\,dm
 \]
-By the Cauchy--Schwarz inequality (Theorem 33.5),
+By the Cauchy inequality (Theorem 33.7),
 \[
 \int_A fg\,dm \le \left|\int_A fg\,dm\right| \le \|f\|_2\,\|g\|_2
 \]
@@ -394,7 +394,7 @@ Therefore,
 \le \|f\|_2^2 + 2\|f\|_2\,\|g\|_2 + \|g\|_2^2
 = \bigl(\|f\|_2 + \|g\|_2\bigr)^2
 \]
-Taking square roots of both sides gives
+Taking square roots of both nonnegative sides gives
 \[
 \|f+g\|_2 \le \|f\|_2 + \|g\|_2
 \]
