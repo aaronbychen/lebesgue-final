@@ -93,12 +93,12 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{Sherlock Zhang}
-\fancyhead[C]{Math 4102 - Midterm Problem List}
+\fancyhead[C]{Math 4102 - Final Problem List}
 \fancyhead[R]{ID: 518915}
 \fancyfoot[C]{\thepage}
 
 % Title info
-\title{Math 4102 - Midterm Problem List}
+\title{Math 4102 - Final Problem List}
 \author{Sherlock Zhang}
 \date{\today}
 
@@ -125,16 +125,16 @@ State and prove Egoroff's theorem.
 
 \textbf{Proof:} Given $\varepsilon > 0$ and positive integers $m$ and $n$, define the set
 \[
-E_{m,n} = \bigcap_{i=n}^{\infty} \{x \mid |f_i(x) - f(x)| < 1/m\}.
+E_{m,n} = \bigcap_{i=n}^{\infty} \{x \mid |f_i(x) - f(x)| < 1/m\}
 \]
 Note that $E_{m,n}$ is measurable. If $U$ is the subset on which $f_n \to f$, then clearly for any $m$, 
 \[
-U \subset \bigcup_{n=1}^{\infty} E_{m,n} \subset A.
+U \subset \bigcup_{n=1}^{\infty} E_{m,n} \subset A
 \]
 
 Now $m(U) = m(A)$ so
 \[
-m\!\left(\bigcup_{n=1}^{\infty} E_{m,n}\right) = m(A).
+m\!\left(\bigcup_{n=1}^{\infty} E_{m,n}\right) = m(A)
 \]
 But $E_{m,n} \subset E_{m,n+1}$ for all $m$ and $n$, so
 \[
@@ -142,17 +142,17 @@ But $E_{m,n} \subset E_{m,n+1}$ for all $m$ and $n$, so
 = \lim_{n \to \infty} [m(A) - m(E_{m,n})]
 = m(A) - \lim_{n \to \infty} m(E_{m,n})
 = m(A) - m\!\left(\bigcup_{n=1}^{\infty} E_{m,n}\right)
-= 0.
+= 0
 \]
 
 Thus for each $m$, there exists an integer $n_m$ such that
 \[
-m(A \setminus E_{m,n_m}) < \varepsilon / 2^m.
+m(A \setminus E_{m,n_m}) < \varepsilon / 2^m
 \]
 
 Now let
 \[
-A_\varepsilon = \bigcap_{m=1}^{\infty} E_{m,n_m}.
+A_\varepsilon = \bigcap_{m=1}^{\infty} E_{m,n_m}
 \]
 Then $A_\varepsilon$ is measurable and
 \[
@@ -161,7 +161,7 @@ m(A \setminus A_\varepsilon)
 = m\!\left(\bigcup_{m=1}^{\infty} (A \setminus E_{m,n_m})\right)
 \le \sum_{m=1}^{\infty} m(A \setminus E_{m,n_m})
 < \sum_{m=1}^{\infty} \varepsilon / 2^m
-= \varepsilon.
+= \varepsilon
 \]
 
 We now claim that $f_n \to f$ uniformly on $A_\varepsilon$ since given any $m$, there exists an $n_m$ such that for all $n > n_m$, $|f_n(x) - f(x)| < 1/m$ everywhere on $E_{m,n_m}$. But $A_\varepsilon \subset E_{m,n_m}$ for every $m$, so for all $n > n_m$, $|f_n(x) - f(x)| < 1/m$ everywhere on $A_\varepsilon$. But this is exactly uniform convergence. \qed
@@ -201,7 +201,7 @@ By the first part of the proof, given $\varepsilon > 0$, there exists for each $
 
 Let 
 \[
-C_0 = \bigcap_{n=1}^{\infty} C_n.
+C_0 = \bigcap_{n=1}^{\infty} C_n
 \]
 Then $C_0$ is closed and
 \[
@@ -210,10 +210,10 @@ m(A \setminus C_0)
 = m\!\left(\bigcup_{n=1}^{\infty} (A \setminus C_n)\right)
 \le \sum_{n=1}^{\infty} m(A \setminus C_n)
 < \varepsilon \sum_{n=1}^{\infty} \frac{1}{2^{n+1}}
-= \varepsilon/2.
+= \varepsilon/2
 \]
 
-We would like to conclude that $f$ is continuous on $C_0$, but we cannot since we need something like uniform convergence for this. However, by Egoroff's Theorem, there is a measurable subset $C \subset C_0$ such that $m(C_0 \setminus C) < \varepsilon/4$ [and thus $m(A \setminus C) = m(A \setminus C_0) + m(C_0 \setminus C) < 3\varepsilon/4$], and $f_n \to f$ uniformly on $C$.
+By Egoroff's Theorem, there is a measurable subset $C \subset C_0$ such that $m(C_0 \setminus C) < \varepsilon/4$, and $f_n \to f$ uniformly on $C$.
 
 \medskip
 
@@ -227,7 +227,7 @@ State the definition of a normed linear space and give both finite- and $ \infty
 
 \vspace{2em}
 \begin{solution}
-\textbf{Definition.} A real \emph{normed linear space} is a vector space $V$ (with addition and scalar multiplication denoted by $\bar{u} + \bar{v}$, $a\bar{u}$, respectively) such that for each $\bar{u} \in V$, there is a unique real number $\|\bar{u}\|$ (called the norm or length of $\bar{u}$) satisfying:
+\textbf{Definition.} A real \emph{normed linear space} is a vector space $V$ such that for each $\bar{u} \in V$, there is a unique real number $\|\bar{u}\|$ satisfying:
 \begin{enumerate}
     \item $\|\bar{u}\| \ge 0$ for all $\bar{u} \in V$;
     \item $\|\bar{u}\| = 0$ if and only if $\bar{u} = \bar{0}$;
@@ -242,13 +242,13 @@ State the definition of a normed linear space and give both finite- and $ \infty
 \textbf{(Finite-dimensional example)}  
 For $(x_1,\dots,x_n) \in \mathbb{R}^n$,
 \[
-\|(x_1,\dots,x_n)\| = \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2}.
+\|(x_1,\dots,x_n)\| = \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2}
 \]
 
 \textbf{($\infty$-dimensional example)}  
 For $f \in C([0,1])$,
 \[
-\|f\| = \int_0^1 |f(x)|\,dx.
+\|f\| = \int_0^1 |f(x)|\,dx
 \]
 \end{solution}
 
@@ -290,13 +290,13 @@ $L^2[0,\pi]$.
 \begin{solution}
 For $j,k=0,1,2,\ldots$, consider
 \[
-    \int_0^\pi \cos jx \cos kx\,dx.
+    \int_0^\pi \cos jx \cos kx\,dx
 \]
 If $j\neq k$, then by the product-to-sum identity,
 \[
     \cos jx\cos kx
     =
-    \frac{1}{2}\bigl[\cos((j-k)x)+\cos((j+k)x)\bigr].
+    \frac{1}{2}\bigl[\cos((j-k)x)+\cos((j+k)x)\bigr]
 \]
 Therefore,
 \[
@@ -332,25 +332,25 @@ is an orthogonal set in $L^2[0,\pi]$.
 \begin{solution}
 \textbf{32.13 Cauchy Inequality:} If $V$ is an inner product space with inner product $\bar{u} \cdot \bar{v}$, then for any $\bar{u}, \bar{v} \in V$,
 \[
-|\bar{u} \cdot \bar{v}| \le \sqrt{\bar{u} \cdot \bar{u}} \, \sqrt{\bar{v} \cdot \bar{v}}.
+|\bar{u} \cdot \bar{v}| \le \sqrt{\bar{u} \cdot \bar{u}} \, \sqrt{\bar{v} \cdot \bar{v}}
 \]
 
 \textbf{Proof:} If $\bar{u} = \bar{0}$ or $\bar{v} = \bar{0}$, then equality holds trivially. Otherwise, consider the vectors
 \[
 \bar{u}' = \frac{\bar{u}}{\sqrt{\bar{u} \cdot \bar{u}}}
 \quad \text{and} \quad
-\bar{v}' = \frac{\bar{v}}{\sqrt{\bar{v} \cdot \bar{v}}}.
+\bar{v}' = \frac{\bar{v}}{\sqrt{\bar{v} \cdot \bar{v}}}
 \]
 
-It is easy to verify that $\bar{u}' \cdot \bar{u}' = \bar{v}' \cdot \bar{v}' = 1$, so that by the lemma,
+It is easy to verify that $\bar{u}' \cdot \bar{u}' = \bar{v}' \cdot \bar{v}' = 1$, so that by the lemma 32.12,
 \[
-|\bar{u}' \cdot \bar{v}'| \le 1.
+|\bar{u}' \cdot \bar{v}'| \le 1
 \]
 But
 \[
 |\bar{u}' \cdot \bar{v}'|
 = \frac{|\bar{u} \cdot \bar{v}|}{\sqrt{\bar{u} \cdot \bar{u}} \, \sqrt{\bar{v} \cdot \bar{v}}}
-\le 1.
+\le 1
 \]
 \qed
 \end{solution}
@@ -374,7 +374,7 @@ i.e.,
 \le
 \left( \int_A f^2 \, dm \right)^{1/2}
 +
-\left( \int_A g^2 \, dm \right)^{1/2}.
+\left( \int_A g^2 \, dm \right)^{1/2}
 \]
 
 \textbf{Proof:}
@@ -382,21 +382,21 @@ We expand $\|f+g\|_2^2$:
 \[
 \|f+g\|_2^2
 = \int_A (f+g)^2\,dm
-= \int_A f^2\,dm + 2\int_A fg\,dm + \int_A g^2\,dm.
+= \int_A f^2\,dm + 2\int_A fg\,dm + \int_A g^2\,dm
 \]
 By the Cauchy--Schwarz inequality (Theorem 33.5),
 \[
-\int_A fg\,dm \le \left|\int_A fg\,dm\right| \le \|f\|_2\,\|g\|_2.
+\int_A fg\,dm \le \left|\int_A fg\,dm\right| \le \|f\|_2\,\|g\|_2
 \]
 Therefore,
 \[
 \|f+g\|_2^2
 \le \|f\|_2^2 + 2\|f\|_2\,\|g\|_2 + \|g\|_2^2
-= \bigl(\|f\|_2 + \|g\|_2\bigr)^2.
+= \bigl(\|f\|_2 + \|g\|_2\bigr)^2
 \]
 Taking square roots of both sides gives
 \[
-\|f+g\|_2 \le \|f\|_2 + \|g\|_2.
+\|f+g\|_2 \le \|f\|_2 + \|g\|_2
 \]
 \qed
 \end{solution}
@@ -432,17 +432,17 @@ State and prove Bessel's inequality for an orthonormal set in $L^2[-\pi,\pi]$.
 Let $\{u_k\}_{k=0}^{\infty}$ be an orthonormal set in $L^2[-\pi,\pi]$, and let
 $f \in L^2[-\pi,\pi]$. Define
 \[
-    c_k = f \cdot u_k = \int_{[-\pi,\pi]} f u_k \, dm.
+    c_k = f \cdot u_k = \int_{[-\pi,\pi]} f u_k \, dm
 \]
 Then Bessel's inequality states that
 \[
-    \sum_{k=0}^{\infty} c_k^2 \le \int_{[-\pi,\pi]} f^2 \, dm.
+    \sum_{k=0}^{\infty} c_k^2 \le \int_{[-\pi,\pi]} f^2 \, dm
 \]
 
 \textbf{Proof.}
 By Corollary 36.2, for every $n$,
 \[
-    \int_{[-\pi,\pi]} f^2 \, dm \ge \sum_{k=0}^{n} c_k^2.
+    \int_{[-\pi,\pi]} f^2 \, dm \ge \sum_{k=0}^{n} c_k^2
 \]
 Since each $c_k^2 \ge 0$, the partial sums
 \[
@@ -451,7 +451,7 @@ Since each $c_k^2 \ge 0$, the partial sums
 are increasing and bounded above by $\int_{[-\pi,\pi]} f^2 \, dm$.
 Therefore the infinite series converges and satisfies
 \[
-    \sum_{k=0}^{\infty} c_k^2 \le \int_{[-\pi,\pi]} f^2 \, dm.
+    \sum_{k=0}^{\infty} c_k^2 \le \int_{[-\pi,\pi]} f^2 \, dm
 \]
 \end{solution}
 
@@ -462,29 +462,76 @@ State and prove the Riemann-Lebesgue lemma for the Fourier series of $f \in L^2[
 
 \vspace{2em}
 \begin{solution}
-Let $\{u_k\}_{k=0}^{\infty}$ be an orthonormal set in $L^2[-\pi,\pi]$, and let
-$f \in L^2[-\pi,\pi]$. Define
+Let \(f\in L^2[-\pi,\pi]\), and define the Fourier coefficients
 \[
-    c_k = f \cdot u_k = \int_{[-\pi,\pi]} f u_k \, dm.
+    a_k=\frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\cos kx\,dx,
+    \qquad
+    b_k=\frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\sin kx\,dx.
 \]
-The Riemann-Lebesgue lemma states that
+
+The Riemann--Lebesgue lemma states that
 \[
-    \lim_{k\to\infty} c_k = 0.
+    \lim_{k\to\infty}\int_{-\pi}^{\pi} f(x)\cos kx\,dx
+    =
+    \lim_{k\to\infty}\int_{-\pi}^{\pi} f(x)\sin kx\,dx
+    =
+    0.
+\]
+Equivalently,
+\[
+    a_k\to 0
+    \qquad\text{and}\qquad
+    b_k\to 0.
 \]
 
 \textbf{Proof.}
-By Bessel's inequality,
+By Bessel's inequality, the Fourier coefficients of \(f\in L^2[-\pi,\pi]\)
+satisfy
 \[
-    \sum_{k=0}^{\infty} c_k^2 \le \int_{[-\pi,\pi]} f^2 \, dm.
+    \frac{a_0^2}{2}
+    +
+    \sum_{k=1}^{\infty}(a_k^2+b_k^2)
+    \leq
+    \frac{1}{\pi}\|f\|_2^2
+    <\infty.
 \]
-Thus $\sum_{k=0}^{\infty} c_k^2$ is a convergent series of nonnegative terms.
-Therefore,
+Thus
 \[
-    \lim_{k\to\infty} c_k^2 = 0.
+    \sum_{k=1}^{\infty}(a_k^2+b_k^2)
 \]
-Hence,
+is a convergent series of nonnegative terms. Therefore its terms must go to
+zero:
 \[
-    \lim_{k\to\infty} c_k = 0.
+    a_k^2+b_k^2\to 0.
+\]
+Since \(a_k^2\geq 0\) and \(b_k^2\geq 0\), it follows that
+\[
+    a_k^2\to 0
+    \qquad\text{and}\qquad
+    b_k^2\to 0.
+\]
+Hence
+\[
+    a_k\to 0
+    \qquad\text{and}\qquad
+    b_k\to 0.
+\]
+
+Finally, since
+\[
+    \int_{-\pi}^{\pi} f(x)\cos kx\,dx=\pi a_k
+\]
+and
+\[
+    \int_{-\pi}^{\pi} f(x)\sin kx\,dx=\pi b_k,
+\]
+we get
+\[
+    \lim_{k\to\infty}\int_{-\pi}^{\pi} f(x)\cos kx\,dx
+    =
+    \lim_{k\to\infty}\int_{-\pi}^{\pi} f(x)\sin kx\,dx
+    =
+    0.
 \]
 \end{solution}
 
@@ -499,7 +546,7 @@ The \textbf{Dirichlet kernel} $D_n(t)$ is
 \[
 D_n(t)
 =
-\frac12+\sum_{k=1}^{n}\cos(kt).
+\frac12+\sum_{k=1}^{n}\cos(kt)
 \]
 
 \vspace{2em}
@@ -568,7 +615,7 @@ K_n(t)=
 \vspace{2em}
 \noindent Its relation with the Dirichlet kernel is
 \[
-    K_n(t)=\frac{1}{n}\sum_{k=0}^{n-1}D_k(t).
+    K_n(t)=\frac{1}{n}\sum_{k=0}^{n-1}D_k(t)
 \]
 
 Indeed, using the definition of $D_k(t)$,
@@ -577,7 +624,7 @@ Indeed, using the definition of $D_k(t)$,
 =
 \frac{1}{2n\sin(t/2)}
 \sum_{k=0}^{n-1}
-\sin\left(\left(k+\frac12\right)t\right).
+\sin\left(\left(k+\frac12\right)t\right)
 \]
 By Lemma 37.4,
 \[
@@ -586,7 +633,7 @@ By Lemma 37.4,
 =
 \sum_{j=1}^{n}\sin\left((2j-1)\frac{t}{2}\right)
 =
-\frac{\sin^2(nt/2)}{\sin(t/2)}.
+\frac{\sin^2(nt/2)}{\sin(t/2)}
 \]
 Therefore,
 \[
@@ -595,7 +642,7 @@ Therefore,
 \frac{\sin^2(nt/2)}
 {2n\sin^2(t/2)}
 =
-K_n(t).
+K_n(t)
 \]
 \end{solution}
 
@@ -615,7 +662,7 @@ where
 \[
 \sigma_n = \frac{s_1+s_2+\cdots+s_n}{n}
 \quad \text{and} \quad
-s_n = \sum_{k=1}^{n} a_k.
+s_n = \sum_{k=1}^{n} a_k
 \]
 The sequence $\{\sigma_n\}$ is called the sequence of arithmetic means.
 
@@ -683,7 +730,7 @@ Thus there exists a number $M$ such that
 for all $x\in[-\pi,\pi]$. By uniform continuity, given $\epsilon>0$, there exists
 a $\delta>0$ such that $|x-y|<\delta$ in $[-\pi,\pi]$ implies
 \[
-    |f(x)-f(y)|<\frac{\epsilon}{2}.
+    |f(x)-f(y)|<\frac{\epsilon}{2}
 \]
 We will show that for some $N$, $n>N$ implies
 \[
@@ -746,7 +793,7 @@ $\{s_n(x)\}$ converges to $f(x)$.
 Let $x_0\in[-\pi,\pi]$ and suppose $f$ is differentiable at $x_0$.
 From Lemma 37.5, the $n$th Fourier partial sum is
 \[
-s_n(x_0)=\frac{1}{\pi}\int_0^\pi [f(x_0+t)+f(x_0-t)]D_n(t)\,dt.
+s_n(x_0)=\frac{1}{\pi}\int_0^\pi [f(x_0+t)+f(x_0-t)]D_n(t)\,dt
 \]
 
 Also, for the particular case $f(x)\equiv 1$, we obtain
@@ -760,12 +807,12 @@ Thus, for our general $f$, differentiable at $x_0$,
 s_n(x_0)-f(x_0)
 =
 \frac{1}{\pi}\int_0^\pi
-[f(x_0+t)+f(x_0-t)-2f(x_0)]D_n(t)\,dt.
+[f(x_0+t)+f(x_0-t)-2f(x_0)]D_n(t)\,dt
 \]
 
 Now define
 \[
-h(t)=\frac{f(x_0+t)+f(x_0-t)-2f(x_0)}{2\sin\frac{t}{2}}.
+h(t)=\frac{f(x_0+t)+f(x_0-t)-2f(x_0)}{2\sin\frac{t}{2}}
 \]
 Then $h(t)$ can be defined so as to be continuous at $t=0$. Therefore,
 $h\in L^2[0,\pi]$. Thus,
@@ -773,12 +820,12 @@ $h\in L^2[0,\pi]$. Thus,
 s_n(x_0)-f(x_0)
 =
 \frac{1}{\pi}\int_0^\pi
-h(t)\sin\left(\left(n+\frac12\right)t\right)\,dt.
+h(t)\sin\left(\left(n+\frac12\right)t\right)\,dt
 \]
 
 Thus by the Riemann--Lebesgue Lemma (Corollary 36.4),
 \[
-s_n(x_0)-f(x_0)\to 0 \quad \text{as } n\to\infty.
+s_n(x_0)-f(x_0)\to 0 \quad \text{as } n\to\infty
 \]
 \end{solution}
 
@@ -795,7 +842,7 @@ Then
     \lim_{n\to\infty}
     \int_\delta^\pi [f(x+t)+f(x-t)]D_n(t)\,dt
     =
-    0.
+    0
 \]
 
 \textbf{Proof.}
@@ -813,13 +860,13 @@ g(t)=
 Clearly $g\in L[-\pi,\pi]$ since
 \[
     2\sin(t/2)\ge 2\sin(\delta/2)>0
-    \qquad \text{on } [\delta,\pi].
+    \qquad \text{on } [\delta,\pi]
 \]
 Thus
 \[
 \int_\delta^\pi [f(x+t)+f(x-t)]D_n(t)\,dt
 =
-\int_0^\pi g(t)\sin\left(n+\frac12\right)t\,dt.
+\int_0^\pi g(t)\sin\left(n+\frac12\right)t\,dt
 \]
 
 Therefore,
@@ -836,7 +883,7 @@ by the Riemann--Lebesgue Lemma and Exercise 42.6.
 \begin{problem}[Exercise 19]
 Compute the complex exponential Fourier series of
 \[
-    f(x)=\sin x+2\cos 3x.
+    f(x)=\sin x+2\cos 3x
 \]
 \end{problem}
 
@@ -844,13 +891,13 @@ Compute the complex exponential Fourier series of
 \begin{solution}
 We write the complex exponential Fourier series in the form
 \[
-    f(x)=\sum_{n=-\infty}^{\infty} c_n e^{inx}.
+    f(x)=\sum_{n=-\infty}^{\infty} c_n e^{inx}
 \]
 Using Euler's formulas,
 \[
     \sin x=\frac{e^{ix}-e^{-ix}}{2i},
     \qquad
-    \cos 3x=\frac{e^{3ix}+e^{-3ix}}{2}.
+    \cos 3x=\frac{e^{3ix}+e^{-3ix}}{2}
 \]
 Therefore,
 \[
@@ -873,7 +920,7 @@ Thus the only nonzero complex Fourier coefficients are
     \qquad
     c_3=1,
     \qquad
-    c_{-3}=1.
+    c_{-3}=1
 \]
 All other coefficients are zero. Hence
 \[
@@ -882,7 +929,7 @@ All other coefficients are zero. Hence
     \frac{i}{2}e^{-ix}
     -\frac{i}{2}e^{ix}
     +e^{-3ix}
-    +e^{3ix}.
+    +e^{3ix}
 \]
 \end{solution}
 
